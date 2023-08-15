@@ -9,3 +9,9 @@ variable "project_name" {
   description = ""
   default     = "nextcloud"
 }
+
+variable "owner" {
+  type        = string
+  description = ""
+  default     = "432627114264"
+}

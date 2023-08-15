@@ -24,7 +24,7 @@ data "template_file" "script" {
   }
 }
 
-resource "aws_instance" "nextcloud" {
+resource "aws_instance" "ec2" {
   instance_type               = "t4g.small"
   ami                         = data.aws_ami.ubuntu.id
   user_data                   = data.template_file.script.rendered
@@ -33,6 +33,22 @@ resource "aws_instance" "nextcloud" {
   key_name                    = "aws01"
   associate_public_ip_address = true
   tags = {
-    Name = "nextcloud"
+    Name = "${var.project_name}"
   }
+}
+
+resource "time_sleep" "wait_seconds" {
+  depends_on      = [aws_instance.ec2]
+  create_duration = "900s"
+}
+
+resource "aws_ami_from_instance" "ami" {
+  name                    = "${var.project_name}-app"
+  source_instance_id      = aws_instance.ec2.id
+  snapshot_without_reboot = true
+  tags = {
+    Name = "${var.project_name}-app"
+  }
+
+  depends_on = [time_sleep.wait_seconds]
 }

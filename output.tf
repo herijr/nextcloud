@@ -1,14 +1,10 @@
-output "data_id" {
-  value       = module.efs.access_points["data"].id
+output "public_ip" {
+  value       = aws_instance.ec2.public_ip
 }
 
-output "apps_id" {
-  value       = module.efs.access_points["apps"].id
+output "load_balancer_dns" {
+  value       = aws_lb.this.dns_name
 }
-output "config_points" {
-  value       = module.efs.access_points["config"].id
-}
-
-output "efs_id" {
-  value       = module.efs.id
+output "rds_endpoint" {
+  value       = aws_db_instance.this.endpoint
 }
