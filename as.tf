@@ -50,7 +50,21 @@ resource "aws_autoscaling_group" "asg" {
   ]
 
   metrics_granularity = "1Minute"
-
+  tag {
+    key = "Name"
+    propagate_at_launch = true
+    value = "${var.project_name}-as"
+  }
+  tag {
+    key = "ManagedBy"
+    propagate_at_launch = true
+    value = "terraform"
+  }
+  tag {
+    key = "Environment"
+    propagate_at_launch = true
+    value = "prod"
+  }
 }
 
 resource "aws_autoscaling_policy" "policy_up" {

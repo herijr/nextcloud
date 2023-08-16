@@ -3,9 +3,12 @@ resource "aws_lb" "this" {
   name               = "${var.project_name}-alb"
   security_groups    = [aws_security_group.sg_alb.id]
   subnets            = module.vpc.public_subnets
-  tags = {
-    "Name" = "${var.project_name}-alb"
-  }
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}-alb"
+    }
+  )
 }
 
 
@@ -14,10 +17,12 @@ resource "aws_lb_target_group" "this" {
   port     = 80
   protocol = "HTTP"
 
-  tags = {
-    "Name" = "${var.project_name}-tg"
-  }
-
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}-tg"
+    }
+  )
   target_type = "instance"
   vpc_id      = module.vpc.vpc_id
 

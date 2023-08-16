@@ -35,7 +35,7 @@ resource "aws_instance" "ec2" {
   tags = merge(
     local.tags,
     {
-      Name = "${var.project_name}"
+      Name = "${var.project_name}-app"
     }
   )
 }
