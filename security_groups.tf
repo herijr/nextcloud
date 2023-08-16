@@ -4,9 +4,9 @@ resource "aws_security_group" "sg_ec2" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     security_groups = [aws_security_group.sg_alb.id]
   }
 

@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "this" {
   health_check {
     healthy_threshold = 2
     path              = "/robots.txt"
-    matcher             = "200"
+    matcher           = "200"
   }
 
   stickiness {

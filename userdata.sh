@@ -2,7 +2,7 @@
 sudo apt update
 sudo apt -y upgrade
 sudo apt install -y apache2
-sudo apt install -y unzip bzip2 curl php php-mysql php-intl php-imagick php-bcmath php-zip php-dom php-mbstring php-xml php-gd php-curl nfs-common
+sudo apt install -y unzip bzip2 curl php php-mysql php-intl php-imagick php-bcmath php-zip php-dom php-mbstring php-xml php-gd php-curl php-redis nfs-common
 
 sudo su
 

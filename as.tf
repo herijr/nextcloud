@@ -10,7 +10,7 @@ data "aws_ami" "api" {
     values = ["hvm"]
   }
 
-  owners = ["${var.owner}"]
+  owners     = ["${var.owner}"]
   depends_on = [aws_ami_from_instance.ami]
 }
 

@@ -10,4 +10,5 @@ module "vpc" {
 
   enable_nat_gateway = false
   enable_vpn_gateway = false
+  tags               = local.tags
 }

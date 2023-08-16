@@ -22,6 +22,12 @@ variable "ec2_instance_type" {
   default     = "t4g.small"
 }
 
+variable "arch" {
+  type        = string
+  description = ""
+  default     = "arm64"
+}
+
 variable "owner" {
   type        = string
   description = ""

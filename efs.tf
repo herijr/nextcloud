@@ -1,6 +1,6 @@
 locals {
   region = var.aws_region
-  azs = slice(data.aws_availability_zones.available.names, 0, 3)
+  azs    = slice(data.aws_availability_zones.available.names, 0, 3)
 }
 
 data "aws_availability_zones" "available" {}
@@ -10,19 +10,19 @@ module "efs" {
   source = "terraform-aws-modules/efs/aws"
 
   # File system
-  name           = "${var.project_name}-efs"
-  encrypted      = true
+  name      = "${var.project_name}-efs"
+  encrypted = true
 
-  performance_mode                = "generalPurpose"
-  throughput_mode                 = "bursting"
+  performance_mode = "generalPurpose"
+  throughput_mode  = "bursting"
 
   lifecycle_policy = {
-    transition_to_ia = "AFTER_30_DAYS"
-    transition_to_primary_storage_class = "AFTER_1_ACCESS"  
+    transition_to_ia                    = "AFTER_30_DAYS"
+    transition_to_primary_storage_class = "AFTER_1_ACCESS"
   }
 
   # File system policy
-  attach_policy                      = false
+  attach_policy = false
 
   # Mount targets / security group
   mount_targets              = { for k, v in zipmap(local.azs, module.vpc.private_subnets) : k => { subnet_id = v } }
@@ -73,5 +73,5 @@ module "efs" {
 
   # Backup policy
   enable_backup_policy = true
-
+  tags                 = local.tags
 }
