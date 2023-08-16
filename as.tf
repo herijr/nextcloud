@@ -17,8 +17,8 @@ data "aws_ami" "api" {
 resource "aws_launch_template" "lt" {
   name_prefix   = "lt-"
   image_id      = data.aws_ami.api.id
-  instance_type = "t4g.small"
-  key_name      = "aws01"
+  instance_type = var.ec2_instance_type
+  key_name      = var.ec2_key
   network_interfaces {
     associate_public_ip_address = true
     delete_on_termination       = true

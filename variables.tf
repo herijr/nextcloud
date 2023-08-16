@@ -10,6 +10,18 @@ variable "project_name" {
   default     = "nextcloud"
 }
 
+variable "ec2_key" {
+  type        = string
+  description = ""
+  default     = "aws01"
+}
+
+variable "ec2_instance_type" {
+  type        = string
+  description = ""
+  default     = "t4g.small"
+}
+
 variable "owner" {
   type        = string
   description = ""

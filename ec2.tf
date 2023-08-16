@@ -25,12 +25,12 @@ data "template_file" "script" {
 }
 
 resource "aws_instance" "ec2" {
-  instance_type               = "t4g.small"
+  instance_type               = var.ec2_instance_type
   ami                         = data.aws_ami.ubuntu.id
   user_data                   = data.template_file.script.rendered
   vpc_security_group_ids      = [aws_security_group.sg_ec2.id]
   subnet_id                   = element(module.vpc.public_subnets, 0)
-  key_name                    = "aws01"
+  key_name                    = var.ec2_key
   associate_public_ip_address = true
   tags = {
     Name = "${var.project_name}"
