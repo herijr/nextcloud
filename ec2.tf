@@ -32,9 +32,12 @@ resource "aws_instance" "ec2" {
   subnet_id                   = element(module.vpc.public_subnets, 0)
   key_name                    = var.ec2_key
   associate_public_ip_address = true
-  tags = {
-    Name = "${var.project_name}"
-  }
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}"
+    }
+  )
 }
 
 resource "time_sleep" "wait_seconds" {
@@ -46,9 +49,12 @@ resource "aws_ami_from_instance" "ami" {
   name                    = "${var.project_name}-app"
   source_instance_id      = aws_instance.ec2.id
   snapshot_without_reboot = true
-  tags = {
-    Name = "${var.project_name}-app"
-  }
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}-app"
+    }
+  )
 
   depends_on = [time_sleep.wait_seconds]
 }
